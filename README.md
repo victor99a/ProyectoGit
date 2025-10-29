@@ -32,28 +32,64 @@ src/
 ---
 ## 🗄 Modelo de Datos (Relaciones)
 
- ┌───────────┐        1        ┌───────────┐       1        ┌───────────────┐
- │  Usuario   │----------------│  Carrito   │----------------│  CarritoItem   │
- │ (id)       │                │ (id)       │       *        │ (id)           │
- │ nombre     │                │ usuarioId  │                │ productoId     │
- └───────────┘                │ total     │                │ cantidad       │
-                              └───────────┘                │ subtotal       │
-                                                           └───────────────┘
+```mermaid
+erDiagram
 
- ┌───────────┐        1        ┌───────────┐       *        ┌───────────┐
- │ Categoria │----------------│ Producto  │----------------│ CarritoItem│
- │ (id)      │        *       │ (id)      │                └───────────┘
- │ nombre    │                │ precio    │
- └───────────┘                │ stock     │
-                              └───────────┘
+    Usuario ||--|| Carrito : "posee"
+    Carrito ||--|{ CarritoItem : "contiene"
+    Producto ||--|{ CarritoItem : "agregado en"
+    Categoria ||--|{ Producto : "clasifica"
+    Usuario ||--|{ Pedido : "realiza"
+    Pedido ||--|{ DetallePedido : "contiene"
+    Producto ||--|{ DetallePedido : "vendido en"
 
- ┌───────────┐        1        ┌───────────┐       *        ┌─────────────────┐
- │ Usuario   │----------------│ Pedido    │----------------│ DetallePedido    │
- │ (id)      │        *       │ (id)      │                │ (id)             │
- │ nombre    │                │ usuarioId │                │ productoId       │
- └───────────┘                │ total     │                │ cantidad         │
-                              │ estado    │                │ precioUnitario   │
-                              └───────────┘                └─────────────────┘
+    Usuario {
+      Long id
+      String nombre
+      String apellido
+      String correo
+    }
+
+    Categoria {
+      Long id
+      String nombre
+    }
+
+    Producto {
+      Long id
+      String nombre
+      Double precio
+      Integer stock
+      String descripcion
+    }
+
+    Carrito {
+      Long id
+      Long usuarioId
+      Double total
+    }
+
+    CarritoItem {
+      Long id
+      Long productoId
+      Integer cantidad
+      Double subtotal
+    }
+
+    Pedido {
+      Long id
+      Long usuarioId
+      Double total
+      String estado
+    }
+
+    DetallePedido {
+      Long id
+      Long productoId
+      Integer cantidad
+      Double precioUnitario
+    }
+
 
 ## 🛍 Flujo Principal del Negocio
 
