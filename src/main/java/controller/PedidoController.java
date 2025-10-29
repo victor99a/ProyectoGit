@@ -1,7 +1,8 @@
 package controller;
 
+import dto.PedidoMapper;
+import dto.PedidoResponseDTO;
 import lombok.RequiredArgsConstructor;
-import model.Pedido;
 import org.springframework.web.bind.annotation.*;
 import service.IntPedidoService;
 
@@ -9,10 +10,11 @@ import service.IntPedidoService;
 @RequestMapping("/api/pedidos")
 @RequiredArgsConstructor
 public class PedidoController {
+
     private final IntPedidoService svc;
 
     @PostMapping("/checkout")
-    public Pedido checkout(@RequestParam Long usuarioId){
-        return svc.checkout(usuarioId);
+    public PedidoResponseDTO checkout(@RequestParam Long usuarioId){
+        return PedidoMapper.toResponse(svc.checkout(usuarioId));
     }
 }
