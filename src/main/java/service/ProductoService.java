@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import model.Producto;
 import org.springframework.stereotype.Service;
 import repository.ProductoRepository;
+import repository.CategoriaRepository;   // <-- IMPORT NECESARIO
 
 import java.util.List;
 
@@ -15,10 +16,15 @@ import java.util.List;
 public class ProductoService implements IntProductoService {
 
     private final ProductoRepository repo;
+    private final CategoriaRepository categoriaRepo; // <-- INYECTADA POR LOMBOK
 
     @Override
     public ProductoResponseDTO crear(ProductoRequestDTO dto) {
         Producto p = ProductoMapper.toEntity(dto);
+        if (dto.getCategoriaId() != null) {
+            var cat = categoriaRepo.findById(dto.getCategoriaId()).orElseThrow();
+            p.setCategoria(cat);
+        }
         return ProductoMapper.toResponse(repo.save(p));
     }
 
@@ -26,6 +32,14 @@ public class ProductoService implements IntProductoService {
     public ProductoResponseDTO actualizar(Long id, ProductoRequestDTO dto) {
         Producto ex = repo.findById(id).orElseThrow();
         ProductoMapper.updateEntity(ex, dto);
+
+        if (dto.getCategoriaId() != null) {
+            var cat = categoriaRepo.findById(dto.getCategoriaId()).orElseThrow();
+            ex.setCategoria(cat);
+        } else {
+            ex.setCategoria(null); // opcional: permite quitar categoría
+        }
+
         return ProductoMapper.toResponse(repo.save(ex));
     }
 
@@ -41,5 +55,7 @@ public class ProductoService implements IntProductoService {
     }
 
     @Override
-    public void eliminar(Long id) { repo.deleteById(id); }
+    public void eliminar(Long id) {
+        repo.deleteById(id);
+    }
 }

@@ -24,14 +24,13 @@ public class ProductoMapper {
         entity.setDescripcion(d.getDescripcion());
     }
 
-    public ProductoResponseDTO toResponse(Producto p) {
-        if (p == null) return null;
+    public ProductoResponseDTO toResponse(Producto p){
         return ProductoResponseDTO.builder()
-                .id(p.getId())
-                .nombre(p.getNombre())
-                .precio(p.getPrecio())
-                .stock(p.getStock())
-                .descripcion(p.getDescripcion())
+                .id(p.getId()).nombre(p.getNombre()).precio(p.getPrecio())
+                .stock(p.getStock()).descripcion(p.getDescripcion())
+                .categoriaId(p.getCategoria() != null ? p.getCategoria().getId() : null)
+                .categoriaNombre(p.getCategoria() != null ? p.getCategoria().getNombre() : null)
                 .build();
     }
+
 }
