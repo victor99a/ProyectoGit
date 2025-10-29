@@ -32,6 +32,7 @@ src/
 ---
 ## 🗄 Modelo de Datos (Relaciones)
 
+<img width="602" height="566" alt="image" src="https://github.com/user-attachments/assets/9c27c8ef-2e35-4fbd-806d-64f56a12d4f5" />
 
 ## 🛍 Flujo Principal del Negocio
 
