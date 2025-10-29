@@ -11,4 +11,5 @@ public class ProductoRequestDTO {
     private Double precio;
     private Integer stock;
     private String descripcion;
+    private Long categoriaId;
 }
