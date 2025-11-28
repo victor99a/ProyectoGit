@@ -2,11 +2,12 @@
 **Autor:** Víctor Barrera  
 **Curso:** GitHub  
 **Se realiza migración a microservicios - Con API GATEWAY**
+
 https://github.com/victor99a/ms-catalog-service // MS. PRODUCTOS Y CATEGORIAS
 
 https://github.com/victor99a/ms-order-service // MS. PEDIDOS, DETALLE, FACTURA, ENVIO
 
-https://github.com/victor99a/ms-user-service // MS. USUARIO CON JWT - REGISTRO SEGUN ROL ADMINISTRADOR/TRABAJADOR]
+https://github.com/victor99a/ms-user-service // MS. USUARIO CON JWT - REGISTRO SEGUN ROL ADMINISTRADOR/TRABAJADOR
 
 https://github.com/victor99a/API-Gateway // API GATEWAY - BASE EN PUERTO 8080 
 
